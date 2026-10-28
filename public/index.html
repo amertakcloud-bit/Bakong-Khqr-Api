@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="km">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#120a24" />
+  <title>KHQR Payment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
+
+  <main class="wrap">
+    <header class="head">
+      <div class="logo">KH<span>QR</span></div>
+      <p class="sub">ទូទាត់តាម Bakong KHQR · ពិនិត្យស្វ័យប្រវត្តិ</p>
+    </header>
+
+    <!-- Step 1: create order -->
+    <section id="formView" class="card glass">
+      <h1>បង្កើតការបញ្ជាទិញ</h1>
+      <form id="orderForm" novalidate>
+        <label for="amount">ចំនួនទឹកប្រាក់</label>
+        <div class="row">
+          <input id="amount" name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="ឧ. 10000" required />
+          <select id="currency" name="currency" aria-label="រូបិយប័ណ្ណ">
+            <option value="KHR">៛ KHR</option>
+            <option value="USD">$ USD</option>
+          </select>
+        </div>
+        <p class="hint" id="amountHint">លុយរៀលត្រូវជាចំនួនគត់</p>
+        <div id="formError" class="alert hidden" role="alert">
+          <p id="formErrorText"></p>
+        </div>
+        <button id="createBtn" class="btn primary" type="submit">បង្កើត KHQR</button>
+      </form>
+    </section>
+
+    <!-- Step 2: pay -->
+    <section id="orderView" class="card glass hidden" aria-live="polite">
+      <div class="top">
+        <h1>ស្កេនដើម្បីទូទាត់</h1>
+        <span id="statusPill" class="pill pending">កំពុងរង់ចាំ</span>
+      </div>
+
+      <div id="qrBox" class="qrbox">
+        <img id="qrImg" alt="KHQR សម្រាប់ទូទាត់" width="260" height="260" />
+        <div id="stateOverlay" class="overlay hidden"><span id="stateIcon"></span></div>
+      </div>
+
+      <p id="stateText" class="state-text">សូមស្កេន QR ដោយកម្មវិធីធនាគារដែលគាំទ្រ KHQR</p>
+
+      <div id="countdownBox" class="countdown">
+        <div class="bar"><i id="barFill"></i></div>
+        <p>ផុតកំណត់ក្នុង <b id="countdown">--:--</b></p>
+      </div>
+
+      <dl class="info">
+        <div><dt>លេខ Order</dt><dd><code id="orderIdText">-</code><button class="copy" data-copy="orderId" type="button">ចម្លង</button></dd></div>
+        <div><dt>ចំនួនទឹកប្រាក់</dt><dd><span id="amountText">-</span><button class="copy" data-copy="amount" type="button">ចម្លង</button></dd></div>
+        <div><dt>រូបិយប័ណ្ណ</dt><dd id="currencyText">-</dd></div>
+      </dl>
+
+      <div id="orderWarn" class="alert hidden" role="alert">
+        <p id="orderWarnText"></p>
+        <button id="retryBtn" class="btn ghost small" type="button">សាកល្បងម្ដងទៀត</button>
+      </div>
+
+      <button id="newBtn" class="btn ghost" type="button">បង្កើតការបញ្ជាទិញថ្មី</button>
+    </section>
+
+    <footer class="foot">ស្ថានភាពទូទាត់ត្រូវបានផ្ទៀងផ្ទាត់ដោយ Server តាម Bakong · មិនអាចកំណត់ដោយ Frontend</footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

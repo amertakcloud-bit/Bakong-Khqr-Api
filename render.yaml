@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: khqr-payment
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BACKGROUND_POLLING
+        value: "true"
+      - key: BAKONG_API_BASE_URL
+        value: https://api-bakong.nbc.gov.kh
+      - key: MERCHANT_CITY
+        value: Phnom Penh
+      # Secrets / personal values: set these in the Render dashboard (never commit them).
+      - key: MONGODB_URI
+        sync: false
+      - key: BAKONG_API_TOKEN
+        sync: false
+      - key: BAKONG_ACCOUNT_ID
+        sync: false
+      - key: MERCHANT_NAME
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: IP_HASH_SALT
+        generateValue: true

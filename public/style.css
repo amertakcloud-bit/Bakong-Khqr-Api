@@ -1,0 +1,146 @@
+:root {
+  --bg: #0f0820;
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-b: rgba(255, 255, 255, 0.14);
+  --text: #f3eefe;
+  --muted: #b3a6d4;
+  --purple: #8b5cf6;
+  --purple-2: #c084fc;
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --radius: 22px;
+  --font: "Noto Sans Khmer", "Khmer UI", "Khmer Sangam MN", "Khmer OS Battambang", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.hidden { display: none !important; }
+
+/* background glow */
+.bg { position: fixed; inset: 0; overflow: hidden; z-index: 0; }
+.orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.55; }
+.o1 { width: 340px; height: 340px; background: #6d28d9; top: -90px; left: -80px; }
+.o2 { width: 300px; height: 300px; background: #a21caf; bottom: -80px; right: -60px; }
+.o3 { width: 220px; height: 220px; background: #4338ca; top: 45%; left: 55%; opacity: 0.35; }
+
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 460px; margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+.head { text-align: center; margin-bottom: 18px; }
+.logo { font-size: 30px; font-weight: 800; letter-spacing: 2px; }
+.logo span { color: var(--purple-2); }
+.sub { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-b);
+  border-radius: var(--radius);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.card { padding: 22px 20px; }
+h1 { font-size: 19px; margin: 0 0 14px; }
+
+label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+.row { display: flex; gap: 10px; }
+input, select {
+  font: inherit; color: var(--text);
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--glass-b);
+  border-radius: 14px;
+  padding: 13px 14px;
+  outline: none;
+  min-width: 0;
+}
+input { flex: 1; font-size: 20px; font-weight: 600; }
+select { width: 112px; }
+select option { color: #111; }
+input:focus, select:focus { border-color: var(--purple-2); box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25); }
+.hint { margin: 6px 2px 14px; font-size: 13px; color: var(--muted); }
+
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer;
+  width: 100%; border: 0; border-radius: 14px;
+  padding: 14px 16px; color: #fff;
+  transition: transform 0.12s, opacity 0.2s, box-shadow 0.2s;
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn.primary { background: linear-gradient(135deg, var(--purple), #d946ef); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.45); }
+.btn.ghost { background: var(--glass); border: 1px solid var(--glass-b); margin-top: 14px; }
+.btn.small { width: auto; padding: 6px 14px; margin-top: 8px; font-size: 13px; }
+
+.alert {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: #fecaca;
+  border-radius: 14px; padding: 10px 14px; margin: 0 0 14px; font-size: 14px;
+}
+.alert p { margin: 0; }
+.alert.soft { background: rgba(251, 191, 36, 0.1); border-color: rgba(251, 191, 36, 0.4); color: #fde68a; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.top h1 { margin: 0; }
+.pill { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 999px; white-space: nowrap; }
+.pill.pending { background: rgba(251, 191, 36, 0.16); color: var(--warn); }
+.pill.paid { background: rgba(52, 211, 153, 0.18); color: var(--ok); }
+.pill.expired { background: rgba(179, 166, 212, 0.18); color: var(--muted); }
+.pill.failed { background: rgba(248, 113, 113, 0.18); color: var(--bad); }
+
+.qrbox {
+  position: relative; width: 288px; max-width: 100%;
+  margin: 18px auto 10px; padding: 14px;
+  background: #fff; border-radius: 20px;
+}
+.qrbox img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.qrbox.dim img { opacity: 0.12; }
+.overlay {
+  position: absolute; inset: 0; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 84px; font-weight: 800;
+}
+.overlay.paid { color: #059669; }
+.overlay.expired { color: #6b7280; }
+.overlay.failed { color: #dc2626; }
+
+.state-text { text-align: center; margin: 6px 0 12px; font-size: 14.5px; color: var(--muted); }
+.state-text.paid { color: var(--ok); font-weight: 700; font-size: 16px; }
+.state-text.failed { color: var(--bad); }
+
+.countdown p { margin: 6px 0 0; text-align: center; font-size: 14px; color: var(--muted); }
+.countdown b { color: var(--text); font-variant-numeric: tabular-nums; font-size: 18px; }
+.bar { height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 99px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--purple), #d946ef); transition: width 1s linear; }
+
+.info { margin: 16px 0 6px; display: grid; gap: 8px; }
+.info div { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 9px 12px; }
+.info dt { color: var(--muted); font-size: 13px; }
+.info dd { margin: 0; font-weight: 600; display: flex; align-items: center; gap: 8px; word-break: break-all; text-align: right; }
+.info code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; }
+.copy {
+  font: inherit; font-size: 12px; cursor: pointer; color: var(--purple-2);
+  background: transparent; border: 1px solid rgba(192, 132, 252, 0.45);
+  border-radius: 8px; padding: 2px 10px;
+}
+.copy.done { color: var(--ok); border-color: var(--ok); }
+
+.foot { margin-top: 18px; text-align: center; font-size: 12px; color: var(--muted); opacity: 0.8; }
+
+@media (max-width: 380px) {
+  .card { padding: 18px 14px; }
+  select { width: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
